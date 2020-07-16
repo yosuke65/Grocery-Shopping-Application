@@ -1,57 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <include layout="@layout/app_bar" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image_view_product_detail"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/image_view_product_detail"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/text_view_product_name_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Product Name"
+                android:textColor="@android:color/black"
+                android:textSize="24dp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/text_view_product_description_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="Description"
+                    android:textSize="18dp" />
+            </ScrollView>
+
+
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/text_view_product_name_detail"
+            android:id="@+id/text_view_product_price_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Product Name"
-            android:textSize="24dp"
-            android:textColor="@android:color/black"/>
-        <TextView
-            android:id="@+id/text_view_product_description_detail"
-            android:layout_width="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="30dp"
+            android:text="$0.00"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"
-            android:textSize="18dp"/>
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/bg_button_add"
+            android:drawableStart="@drawable/ic_baseline_add_24"
+            android:drawablePadding="-20dp"
+            android:text="Add"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+</LinearLayout>
 
-
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/text_view_product_price_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="$0.00"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="30dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_alignParentBottom="true"
-        android:drawableStart="@drawable/ic_baseline_add_24"
-        android:drawablePadding="-20dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/bg_button_add"
-        android:textColor="@android:color/white"
-        android:text="Add"/>
-</RelativeLayout>

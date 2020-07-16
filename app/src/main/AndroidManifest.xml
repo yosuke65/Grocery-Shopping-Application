@@ -11,9 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ProductDetailActivity"></activity>
-        <activity android:name=".activities.SubCatActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.LoginRegisterActivity"></activity>
+        <activity android:name=".activities.UserProfileActivity" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.ProductDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.SubCatActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

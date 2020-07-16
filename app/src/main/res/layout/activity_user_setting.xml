@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/text_view_user_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi, User"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="32dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_user_profile"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/text_view_user_profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email:"
+        android:textSize="18dp"
+        android:inputType="textEmailAddress"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/text_view_user_profile_mobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Mobile:"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"
+        android:inputType="phone"/>
+    <Button
+        android:id="@+id/button_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/logout"
+        android:background="@drawable/bg_login_register_button"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"/>
+</LinearLayout>

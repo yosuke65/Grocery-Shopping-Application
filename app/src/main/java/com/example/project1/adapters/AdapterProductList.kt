@@ -21,15 +21,15 @@ class AdapterProductList(var mContext: Context, var subId: Int) :
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         fun bind(product: Product) {
             itemView.text_view_product_name.text = product.productName
-//            itemView.text_view_product_price.text = "$${"%.2f".format(product.price)}"
-//            itemView.text_view_product_mrt.text = "$${"%.2f".format(product.mrp)}"
-//            itemView.text_view_product_saved.text = "Save $${"%.2f".format(product.mrp - product.price)}"
-            itemView.text_view_product_price.text = "$${Math.round(product.price*100)/100.00}"
-            itemView.text_view_product_mrt.text = "$${Math.round(product.mrp*100)/100.00}"
-            itemView.text_view_product_saved.text = "Save $${Math.round(product.mrp - product.price)/100.00}"
+            itemView.text_view_product_price.text = "$${"%.2f".format(product.price)}"
+            itemView.text_view_product_mrt.text = "$${"%.2f".format(product.mrp)}"
+            itemView.text_view_product_saved.text = "Save $${"%.2f".format(product.mrp - product.price)}"
+//            itemView.text_view_product_price.text = "$${Math.round(product.price*100)/100.00}"
+//            itemView.text_view_product_mrt.text = "$${Math.round(product.mrp*100)/100.00}"
+//            itemView.text_view_product_saved.text = "Save $${Math.round(product.mrp - product.price)/100.00}"
 
             Picasso.get().load(Endpoints.getImage(product.image)).fit().centerCrop()
-                .placeholder(R.drawable.no_image_progress).error(R.drawable.icon_no_image)
+                .placeholder(R.drawable.progress_loading_image).error(R.drawable.icon_no_image)
                 .into(itemView.image_view_product)
             itemView.setOnClickListener {
                 var myIntent = Intent(mContext, ProductDetailActivity::class.java)
