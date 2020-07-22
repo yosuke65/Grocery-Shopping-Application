@@ -19,7 +19,7 @@ class UserProfileActivity : AppCompatActivity() {
 
     private fun init() {
         sessionManager = SessionManager(this)
-        var name = sessionManager.getUser()
+        var name = sessionManager.getUserName()
         var email = sessionManager.getEmail()
         var mobile = sessionManager.getMobile()
         text_view_user_profile_name.text = "Hi,$name"

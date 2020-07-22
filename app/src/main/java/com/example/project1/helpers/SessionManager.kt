@@ -1,6 +1,7 @@
 package com.example.project1.helpers
 
 import android.content.Context
+import com.example.project1.models.User
 
 class SessionManager(mContext: Context) {
 
@@ -9,6 +10,7 @@ class SessionManager(mContext: Context) {
 
     companion object {
         const val FILE_USER_INFO = "user_info"
+        const val KEY_USER_ID = "user_id"
         const val KEY_USER_NAME = "user_name"
         const val KEY_USER_EMAIL = "user_email"
         const val KEY_USER_MOBILE = "user_mobile"
@@ -16,15 +18,7 @@ class SessionManager(mContext: Context) {
         const val KEY_IS_LOGGED_IN = "is_logged_in"
     }
 
-    fun register(name: String, email: String, mobile: String, password: String) {
-        editor.putString(KEY_USER_NAME, name)
-        editor.putString(KEY_USER_EMAIL, email)
-        editor.putString(KEY_USER_MOBILE, mobile)
-        editor.putBoolean(KEY_IS_LOGGED_IN, false)
-        editor.commit()
-    }
-
-    fun getUser(): String? {
+    fun getUserName(): String? {
         return sharedPreferences.getString(KEY_USER_NAME, null)
     }
     fun getEmail(): String? {
@@ -38,24 +32,27 @@ class SessionManager(mContext: Context) {
         return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false)
     }
 
-    fun login(name: String, email: String, mobile: String, token: String) {
+    fun getUserId():String?{
+        return sharedPreferences.getString(KEY_USER_ID, null)
+    }
+
+    fun getUser(): User?{
+        return User(null,getUserId(),null,getEmail(),getUserName(),getMobile(),null )
+    }
+
+
+    fun getToken():String?{
+        return sharedPreferences.getString(KEY_TOKEN, null)
+    }
+
+    fun login(id:String, name: String, email: String, mobile: String, token: String) {
         editor.putString(KEY_TOKEN, token)
+        editor.putString(KEY_USER_ID, id)
         editor.putString(KEY_USER_NAME, name)
         editor.putString(KEY_USER_EMAIL, email)
         editor.putString(KEY_USER_MOBILE, mobile)
         editor.putBoolean(KEY_IS_LOGGED_IN, true)
         editor.commit()
-//        var savedEmail = sharedPreferences.getString(KEY_USER_EMAIL, null)
-//        var savedPassword = sharedPreferences.getString(KEY_USER_PASSWORD, null)
-//
-//        return if (email == savedEmail && password == savedPassword) {
-//
-//            editor.putBoolean(KEY_IS_LOGGED_IN, true)
-//            editor.commit()
-//            true
-//        } else {
-//            false
-//        }
     }
 
     fun logout() {

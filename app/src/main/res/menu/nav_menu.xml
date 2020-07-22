@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/item_account"
+            android:title="My Account"></item>
+        <item
+            android:id="@+id/item_order"
+            android:title="My Order"></item>
+        <item
+            android:id="@+id/item_category"
+            android:title="Category"></item>
+    </group>
+
+    <group>
+        <item
+            android:id="@+id/item_rate_app"
+            android:title="Rate this App"></item>
+        <item
+            android:id="@+id/item_help"
+            android:title="Help"></item>
+        <item
+            android:id="@+id/item_logout"
+            android:title="Logout"></item>
+    </group>
+</menu>

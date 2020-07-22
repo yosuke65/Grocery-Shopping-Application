@@ -1,0 +1,10 @@
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar_add_address"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"
+    android:theme="@style/Platform.MaterialComponents"
+    android:background="@android:color/transparent"
+    >
+
+
+</androidx.appcompat.widget.Toolbar>

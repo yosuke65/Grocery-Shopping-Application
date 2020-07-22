@@ -7,17 +7,30 @@ class Endpoints {
         private const val URL_PRODUCTS = "products"
         private const val URL_REGISTER = "auth/register"
         private const val URL_LOGIN = "auth/login"
+        private const val URL_ADDRESS = "address"
+        private const val URL_ORDER = "orders"
 
 
-        fun getCategory() = Config.BASE_URL + URL_CATEGORY
+        fun getCategoryURL() = Config.BASE_URL + URL_CATEGORY
 
-        fun getSubCategory(catId: Int) = "${Config.BASE_URL + URL_SUB_CATEGORY}/$catId"
-        fun getImage(image: String) = Config.IMAGE_URL + image
+        fun getSubCategoryURL(catId: Int) = "${Config.BASE_URL + URL_SUB_CATEGORY}/$catId"
 
-        fun getProductsBySubId(subId: Int) = "${Config.BASE_URL + URL_PRODUCTS}/sub/$subId"
+        fun getImageURL(image: String) = Config.IMAGE_URL + image
 
-        fun postRegister() = "${Config.BASE_URL + URL_REGISTER}"
-        fun postLogin() = "${Config.BASE_URL + URL_LOGIN}"
+        fun getProductsURL(subId: Int) = "${Config.BASE_URL + URL_PRODUCTS}/sub/$subId"
+
+        fun getRegisterURL() = "${Config.BASE_URL + URL_REGISTER}"
+
+        fun getLoginURL() = "${Config.BASE_URL + URL_LOGIN}"
+
+        fun getAddressURL() = "${Config.BASE_URL + URL_ADDRESS}"
+
+        fun getAddressURL(id: String) = "${Config.BASE_URL + URL_ADDRESS}/$id"
+
+        fun getOrdersURL()= "${Config.BASE_URL + URL_ORDER}"
+
+        fun getOrdersURL(userId:String?) = "${Config.BASE_URL + URL_ORDER}/$userId"
+
 
     }
 }

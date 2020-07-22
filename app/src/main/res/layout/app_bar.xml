@@ -2,20 +2,8 @@
     android:id="@+id/toolbar_main"
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
-    android:background="@color/colorTheme1"
-    android:theme="@style/Platform.MaterialComponents">
+    android:theme="@style/AppTheme"
+    >
 
-    <!--    <Button-->
-    <!--        android:id="@+id/button_back"-->
-    <!--        android:layout_width="20dp"-->
-    <!--        android:layout_height="20dp"-->
-    <!--        android:background="@drawable/ic_baseline_arrow_back_ios_24" />-->
-
-    <!--    <TextView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="@string/app_name"-->
-    <!--        android:textColor="@android:color/white"-->
-    <!--        android:textSize="20dp" />-->
 
 </androidx.appcompat.widget.Toolbar>

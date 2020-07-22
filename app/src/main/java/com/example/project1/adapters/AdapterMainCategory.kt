@@ -24,10 +24,8 @@ class AdapterMainCategory(var mContext: Context) :
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(cat: Category) {
-//            Picasso.get().load(Endpoints.getImage(cat.catImage)).fit().centerCrop()
-//                .placeholder(R.drawable.progress_loading_image).error(R.drawable.icon_no_image)
-//                .into(itemView.image_view_category)
-            Picasso.get().load(Endpoints.getImage(cat.catImage)).fit().centerCrop()
+
+            Picasso.get().load(Endpoints.getImageURL(cat.catImage)).fit().centerCrop()
                 .placeholder(R.drawable.loading_image_main).error(R.drawable.icon_no_image)
                 .into(itemView.image_view_category, object : Callback {
                     override fun onSuccess() {

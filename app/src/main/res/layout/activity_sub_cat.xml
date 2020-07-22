@@ -1,9 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/app_bar" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorTransparentBlack3"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +23,10 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/colorTheme1"
+            app:tabSelectedTextColor="@color/darkGrey3"
+            app:tabTextColor="@color/darkGrey1" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
