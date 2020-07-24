@@ -2,6 +2,7 @@ package com.example.project1.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.project1.R
 import com.example.project1.adapters.AdapterShoppingCartList
 import com.example.project1.database.DBHelper
@@ -27,8 +29,8 @@ class ShoppingCartActivity : AppCompatActivity(), AdapterShoppingCartList.OnAdap
     var mList: ArrayList<Product> = ArrayList()
     lateinit var dbHelper: DBHelper
     lateinit var sessionManager: SessionManager
-    private var userNameTextView:TextView? = null
-    private var countTextView:TextView? = null
+    private var userNameTextView: TextView? = null
+    private var countTextView: TextView? = null
 
     companion object {
         const val SHIPPING_FEE = 4.99
@@ -41,6 +43,7 @@ class ShoppingCartActivity : AppCompatActivity(), AdapterShoppingCartList.OnAdap
 
         init()
     }
+
 
     private fun init() {
         sessionManager = SessionManager(this)
@@ -56,14 +59,17 @@ class ShoppingCartActivity : AppCompatActivity(), AdapterShoppingCartList.OnAdap
 
         if (dbHelper.isProductInCart()) {
             showEmptyMessage(false)
-            showOrderSummary(true)
-        }else{
+            Handler().postDelayed({
+                animShowOrderSummary()
+                showOrderSummary(true)
+            }, 500)
+        } else {
             showEmptyMessage(true)
             showOrderSummary(false)
         }
 
-        button_checkout.setOnClickListener{
-            startActivity(Intent(this,AddressActivity::class.java))
+        button_checkout.setOnClickListener {
+            startActivity(Intent(this, AddressActivity::class.java))
         }
 
 
@@ -74,6 +80,10 @@ class ShoppingCartActivity : AppCompatActivity(), AdapterShoppingCartList.OnAdap
         recycler_view_shopping_cart.adapter = myAdapter
     }
 
+    private fun animShowOrderSummary() {
+        var animation = AnimationUtils.loadAnimation(this, R.anim.anim_show_order_summary)
+        order_summary.startAnimation(animation)
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -101,10 +111,10 @@ class ShoppingCartActivity : AppCompatActivity(), AdapterShoppingCartList.OnAdap
                     var rootView = itemMenu?.actionView
                     userNameTextView = rootView?.text_view_user_setting
                     userNameTextView?.text = "Hi, ${sessionManager.getUserName()}"
-                    rootView?.text_view_user_setting?.setOnClickListener{
+                    rootView?.text_view_user_setting?.setOnClickListener {
                         startActivity(Intent(this, UserProfileActivity::class.java))
                     }
-                    rootView?.image_view_person?.setOnClickListener{
+                    rootView?.image_view_person?.setOnClickListener {
                         startActivity(Intent(this, UserProfileActivity::class.java))
                     }
                 }
@@ -117,7 +127,7 @@ class ShoppingCartActivity : AppCompatActivity(), AdapterShoppingCartList.OnAdap
     private fun getTotalCountInCart(): Int {
         var itemCountInCart = 0
         var cartList = dbHelper.readCart()
-        for(item in cartList){
+        for (item in cartList) {
             itemCountInCart += dbHelper.getItemQuantity(item._id)
         }
 
@@ -131,8 +141,8 @@ class ShoppingCartActivity : AppCompatActivity(), AdapterShoppingCartList.OnAdap
             android.R.id.home -> {
                 finish()
             }
-            R.id.action_go_to_cart ->{
-                startActivity(Intent(this,ShoppingCartActivity::class.java))
+            R.id.action_go_to_cart -> {
+                startActivity(Intent(this, ShoppingCartActivity::class.java))
                 finish()
             }
         }
@@ -183,15 +193,15 @@ class ShoppingCartActivity : AppCompatActivity(), AdapterShoppingCartList.OnAdap
         dbHelper.deleteItem(product._id)
         if (mList.isEmpty()) {
             showEmptyMessage(true)
-            animOrderSummary()
+            animHideOrderSummary()
         }
         setOrderSummary()
         setItemCountInCart()
     }
 
-    private fun animOrderSummary() {
+    private fun animHideOrderSummary() {
         var animation: Animation =
-            AnimationUtils.loadAnimation(this, R.anim.anim_order_summary)
+            AnimationUtils.loadAnimation(this, R.anim.anim_hide_order_summary)
         order_summary.startAnimation(animation)
     }
 

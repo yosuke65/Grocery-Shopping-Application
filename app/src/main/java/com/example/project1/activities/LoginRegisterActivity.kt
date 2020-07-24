@@ -1,6 +1,7 @@
 package com.example.project1.activities
 
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,11 @@ class LoginRegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun init() {
+
+        var animationDrawable = login_register_layout.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(10)
+        animationDrawable.setExitFadeDuration(2000)
+        animationDrawable.start()
         button_sign_in.setOnClickListener(this)
         button_sign_up.setOnClickListener(this)
 

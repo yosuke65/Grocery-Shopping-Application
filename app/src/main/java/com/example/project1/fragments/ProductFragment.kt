@@ -1,13 +1,16 @@
 package com.example.project1.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -23,16 +26,21 @@ import com.example.project1.models.ProductResponse
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_product.*
 import kotlinx.android.synthetic.main.row_product_adapter.view.*
-import kotlinx.android.synthetic.main.shopping_cart_menu.*
+import org.json.JSONException
+
 
 private const val ARG_PARAM1 = "param1"
+
 
 class ProductFragment : Fragment(), AdapterProductList.OnAdapterInteraction {
 
     private var subId: Int? = null
     lateinit var dbHelper: DBHelper
-    lateinit var myAdapter:AdapterProductList
-    private var listener:OnFragmentInteraction? = null
+    lateinit var myAdapter: AdapterProductList
+    private lateinit var listener: OnFragmentInteraction
+    private var handler = Handler()
+    private val delayedTime: Long = 1000
+    var lastVisibleItemPosition = 0
 
 //    private var mList:ArrayList<Product> = ArrayList()
 
@@ -48,7 +56,6 @@ class ProductFragment : Fragment(), AdapterProductList.OnAdapterInteraction {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         var view = inflater.inflate(R.layout.fragment_product, container, false)
         return view
     }
@@ -65,62 +72,77 @@ class ProductFragment : Fragment(), AdapterProductList.OnAdapterInteraction {
     }
 
     private fun init() {
-        var sessionManager = SessionManager(activity!!)
         dbHelper = DBHelper(activity!!)
         myAdapter = AdapterProductList(activity!!)
         myAdapter.setOnAdapterInteraction(this)
         recycler_view.layoutManager = LinearLayoutManager(activity)
         recycler_view.adapter = myAdapter
-        progress_circular.visibility = View.VISIBLE
+        lastVisibleItemPosition = (recycler_view.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+        recycler_view.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastVisibleItemPosition()
+            }
+        })
+
         getData()
-        progress_circular.visibility = View.INVISIBLE
     }
 
     private fun getData() {
         var requestQueue = Volley.newRequestQueue(activity)
-        var request = StringRequest(Request.Method.GET, Endpoints.getProductsURL(subId!!),Response.Listener {
-            var gson = GsonBuilder().create()
-            var productResponse = gson.fromJson(it,ProductResponse::class.java)
-            myAdapter.setData(productResponse.data)
-        }, Response.ErrorListener {
-            activity!!.toast("Failed to read data")
-        })
+        var request =
+            StringRequest(Request.Method.GET, Endpoints.getProductsURL(subId!!), Response.Listener {
+                var gson = GsonBuilder().create()
+                var productResponse = gson.fromJson(it, ProductResponse::class.java)
+                myAdapter.setData(productResponse.data)
+            }, Response.ErrorListener {
+                activity!!.toast("Failed to read data")
+            })
 
         requestQueue.add(request)
     }
 
-    override fun onItemClicked(view: View, operation:String, position: Int, product: Product) {
+    override fun onItemClicked(view: View, operation: String, position: Int, product: Product) {
         when (operation) {
             AdapterProductList.ADD -> {
-                addToCart(view,product)
+                addToCart(view, product)
             }
             AdapterProductList.INCREMENT -> {
-                incrementItemQuantity(view,product._id)
+                incrementItemQuantity(view, product._id)
             }
             AdapterProductList.DECREMENT -> {
-                decrementItemQuantity(view,product._id)
+                decrementItemQuantity(view, product._id)
             }
-            else ->{
+            else -> {
                 activity!!.toast("id not found")
             }
         }
     }
 
-    private fun addToCart(view: View,product: Product) {
+    override fun onImageLoadSuccess(view: View) {
+        if(view == recycler_view.layoutManager!!.findViewByPosition(lastVisibleItemPosition)){
+            listener!!.onImageLoadSuccess(view)
+        }
+    }
+
+    private fun addToCart(view: View, product: Product) {
 
         view.button_increment_decrement.visibility = View.VISIBLE
         view.button_add.visibility = View.INVISIBLE
-        dbHelper.addToCart(product,1)
+        dbHelper.addToCart(product, 1)
         setItemCountInCart()
     }
 
-    interface OnFragmentInteraction{
-        fun setText(text:String)
+    interface OnFragmentInteraction {
+        fun setText(text: String)
+        fun onImageLoadSuccess(view: View)
     }
 
-    fun setOnFragmentInteraction(onFragmentInteraction:OnFragmentInteraction){
+    fun setOnFragmentInteraction(onFragmentInteraction: OnFragmentInteraction) {
         listener = onFragmentInteraction
     }
+
     private fun setItemCountInCart() {
         listener?.setText(getTotalCountInCart().toString())
     }
@@ -128,14 +150,14 @@ class ProductFragment : Fragment(), AdapterProductList.OnAdapterInteraction {
     private fun getTotalCountInCart(): Int {
         var itemCountInCart = 0
         var cartList = dbHelper.readCart()
-        for(item in cartList){
+        for (item in cartList) {
             itemCountInCart += dbHelper.getItemQuantity(item._id)
         }
 
         return itemCountInCart
     }
 
-    private fun decrementItemQuantity(view:View,id: String) {
+    private fun decrementItemQuantity(view: View, id: String) {
 
         var count = view.text_view_count.text.toString().toInt()
         if (count === 1) {
@@ -154,7 +176,7 @@ class ProductFragment : Fragment(), AdapterProductList.OnAdapterInteraction {
         dbHelper.deleteItem(id)
     }
 
-    private fun incrementItemQuantity(view: View,id:String) {
+    private fun incrementItemQuantity(view: View, id: String) {
         var count = view.text_view_count.text.toString().toInt()
         count++
         view.text_view_count.text = count.toString()

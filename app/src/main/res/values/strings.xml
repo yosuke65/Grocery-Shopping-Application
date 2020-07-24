@@ -35,4 +35,5 @@
     <string name="button_pay_cash">Pay by Cash</string>
     <string name="order_success">Order Successful</string>
     <string name="thank_you">Thank you!</string>
+    <string name="text_button_edit_address">Save</string>
 </resources>

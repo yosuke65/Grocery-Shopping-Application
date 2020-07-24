@@ -2,6 +2,7 @@ package com.example.project1.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -20,9 +21,12 @@ import com.example.project1.helpers.SessionManager
 import com.example.project1.helpers.toolbar
 import com.example.project1.models.Category
 import com.example.project1.models.SubCatResponse
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_sub_cat.*
+import kotlinx.android.synthetic.main.activity_sub_cat.tab_layout
 import kotlinx.android.synthetic.main.main_menu.view.*
+import kotlinx.android.synthetic.main.placeholder_layout_product_list.*
 import kotlinx.android.synthetic.main.shopping_cart_menu.view.*
 
 
@@ -33,6 +37,9 @@ class SubCatActivity : AppCompatActivity(),ProductFragment.OnFragmentInteraction
     lateinit var sessionManager: SessionManager
     private var countTextView:TextView? = null
     private var userNameTextView: TextView? = null
+    private var shimmerFrameLayout:ShimmerFrameLayout? = null
+    var handler = Handler()
+    val delayedTime:Long = 1000
 
 
 
@@ -45,9 +52,11 @@ class SubCatActivity : AppCompatActivity(),ProductFragment.OnFragmentInteraction
 
 
     private fun init() {
+        shimmerFrameLayout = shimmer_view_container
+        shimmerFrameLayout!!.visibility = View.VISIBLE
+        shimmerFrameLayout!!.startShimmer()
         sessionManager = SessionManager(this)
         dbHelper = DBHelper(this)
-
 
         var myAdapter = AdapterTabViewPager(supportFragmentManager)
         view_pager.adapter = myAdapter
@@ -69,7 +78,7 @@ class SubCatActivity : AppCompatActivity(),ProductFragment.OnFragmentInteraction
                 myAdapter.addFragment(productFragment)
                 myAdapter.addSubCategory(data)
             }
-            progress_circular.visibility = View.INVISIBLE
+
             tab_layout.setupWithViewPager(view_pager)
         }, Response.ErrorListener {
 
@@ -141,6 +150,14 @@ class SubCatActivity : AppCompatActivity(),ProductFragment.OnFragmentInteraction
 
     override fun setText(text: String) {
         countTextView?.text = text
+    }
+
+    override fun onImageLoadSuccess(view: View) {
+        handler.postDelayed({
+            shimmerFrameLayout!!.stopShimmer()
+            shimmerFrameLayout!!.visibility = View.INVISIBLE
+            activity_sub_cat.visibility = View.VISIBLE
+        },delayedTime)
     }
 
 

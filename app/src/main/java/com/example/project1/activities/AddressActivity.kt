@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
@@ -33,6 +34,7 @@ class AddressActivity : AppCompatActivity(), AdapterAddressList.OnAdapterInterac
     }
 
     override fun onRestart() {
+        Log.d("address", "onRestart()")
         getData()
         super.onRestart()
     }
@@ -86,6 +88,12 @@ class AddressActivity : AppCompatActivity(), AdapterAddressList.OnAdapterInterac
             AdapterAddressList.DELETE -> {
                 deleteData(address)
             }
+            AdapterAddressList.EDIT ->{
+                var myIntent = Intent(this,EditAddressActivity::class.java)
+                myIntent.putExtra(Address.KEY,address)
+                startActivity(myIntent)
+                finish()
+            }
         }
     }
 
@@ -102,5 +110,14 @@ class AddressActivity : AppCompatActivity(), AdapterAddressList.OnAdapterInterac
             })
 
         Volley.newRequestQueue(this).add(request)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home->{
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

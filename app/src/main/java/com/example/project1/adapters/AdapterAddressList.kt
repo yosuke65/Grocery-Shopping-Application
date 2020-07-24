@@ -31,7 +31,8 @@ class AdapterAddressList(var mContext: Context):RecyclerView.Adapter<AdapterAddr
             itemView.text_view_street_name.text = address.streetName
             itemView.text_view_city_name.text = address.city
             itemView.text_view_pin_code.text = address.pincode.toString()
-            itemView.text_view_address_type.text = address.getAddressType(address.type.toInt())
+            itemView.text_view_billing_name.text = address.name
+            itemView.text_view_address_type.text = address.type
 
             itemView.setOnClickListener{
                 var myIntent = Intent(mContext, PaymentActivity::class.java)
@@ -44,6 +45,10 @@ class AdapterAddressList(var mContext: Context):RecyclerView.Adapter<AdapterAddr
                 mList?.remove(address)
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, mList!!.size)
+            }
+
+            itemView.button_edit_address.setOnClickListener {
+                listener?.onItemClicked(itemView, EDIT, address, position)
             }
         }
     }

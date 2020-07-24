@@ -1,24 +1,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal">
-        <TextView
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_payment_success"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/order_success"
-            android:textSize="24dp"
-            android:textColor="@color/darkGrey4"/>
-        <TextView
+            app:lottie_rawRes="@raw/payment_success"
+            app:lottie_autoPlay="false"/>
+        <LinearLayout
+            android:id="@+id/text_view_order_success"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/thank_you"
-            android:textSize="24dp"
-            android:textColor="@color/darkGrey4"/>
+            android:visibility="invisible"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/order_success"
+                android:textSize="24dp"
+                android:textColor="@color/darkGrey4"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/thank_you"
+                android:textSize="24dp"
+                android:textColor="@color/darkGrey4"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 

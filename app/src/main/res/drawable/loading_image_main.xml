@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
 
-<animation-list xmlns:android="http://schemas.android.com/apk/res/android" >
-<!--    <item-->
-<!--        android:drawable="@drawable/start_gradation"-->
-<!--        android:duration="400"/>-->
-<!--&lt;!&ndash;    <item&ndash;&gt;-->
-<!--&lt;!&ndash;        android:drawable="@drawable/center_gradation"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:duration="100" />&ndash;&gt;-->
-<!--    <item-->
-<!--        android:drawable="@drawable/end_gradation"-->
-<!--        android:duration="400" />-->
-    <item
-        android:drawable="@drawable/fade_in_load"
-        android:duration="400" />
-    <item
-        android:drawable="@drawable/fade_out_load"
-        android:duration="400" />
-</animation-list>
+</layer-list>

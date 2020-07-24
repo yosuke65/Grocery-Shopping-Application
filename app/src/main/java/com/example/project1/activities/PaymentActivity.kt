@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -19,6 +20,7 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.app_bar_add_address.*
 import org.json.JSONObject
+import kotlin.time.seconds
 
 class PaymentActivity : AppCompatActivity() {
     lateinit var dbHelper: DBHelper
@@ -58,11 +60,12 @@ class PaymentActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
+        text_view_billing_name_payment.text = address.name
         text_view_house_no_payment.text = address.houseNo
         text_view_street_name_payment.text = address.streetName
         text_view_city_name_payment.text = address.city
         text_view_pin_code_payment.text = address.pincode.toString()
-        text_view_address_type_payment.text = address.getAddressType(address.type.toInt())
+        text_view_address_type_payment.text = address.type
 
         setOrderSummary()
     }
@@ -76,6 +79,7 @@ class PaymentActivity : AppCompatActivity() {
         var params = HashMap<String, Any?>()
         params["userId"] = userId
         params["orderStatus"] = orderStatus
+        params["orderSummary"] = makeOrderSummery(products)
         params["user"] = makeUserJsonObject(user)
         params["shippingAddress"] = makeAddressJsonObject(address)
         params["products"] = makeProductJsonArray(products)
@@ -86,7 +90,6 @@ class PaymentActivity : AppCompatActivity() {
             Endpoints.getOrdersURL(),
             jsonObject,
             Response.Listener {
-                toast("Request Success")
                 startActivity(Intent(this, OrderConfirmationActivity::class.java))
             },
             Response.ErrorListener {
@@ -94,6 +97,28 @@ class PaymentActivity : AppCompatActivity() {
             })
 
         Volley.newRequestQueue(this).add(request)
+    }
+
+
+    private fun makeOrderSummery(products: ArrayList<Product>): JSONObject {
+        var params = HashMap<String,String>()
+        var totalAmount:Double = 0.00
+        var discount:Double  = ShoppingCartActivity.SHIPPING_FEE
+        var ourPrice:Double = 0.00
+        var deliveryCharges:Double = 0.00
+        var orderAmount:Double = 0.00
+        for(product in products){
+            totalAmount += product.price * dbHelper.getItemQuantity(product._id)
+
+        }
+        orderAmount = totalAmount
+        ourPrice = totalAmount - discount
+        params["totalAmount"] = totalAmount.toString()
+        params["ourPrice"] = ourPrice.toString()
+        params["discount"] = discount.toString()
+        params["deliveryCharges"] = deliveryCharges.toString()
+        params["orderAmount"] = orderAmount.toString()
+        return JSONObject(params as Map<*,*>)
     }
 
     private fun makeUserJsonObject(user: User?):JSONObject {
@@ -146,6 +171,15 @@ class PaymentActivity : AppCompatActivity() {
             subTotal += product.price * dbHelper.getItemQuantity(product._id)
         }
         return subTotal
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home->{
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

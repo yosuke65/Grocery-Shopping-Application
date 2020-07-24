@@ -2,9 +2,9 @@ package com.example.project1.models
 
 data class OrderSummary(
     val _id: String,
-    val deliveryCharges: Int,
-    val discount: Int,
-    val orderAmount: Int,
-    val ourPrice: Int,
-    val totalAmount: Int
+    val deliveryCharges: Double,
+    val discount: Double,
+    val orderAmount: Double,
+    val ourPrice: Double,
+    val totalAmount: Double
 )

@@ -154,6 +154,10 @@ class DBHelper(mContext: Context) : SQLiteOpenHelper(mContext, DB_NAME, null, DB
         db.delete(TABLE_NAME_CART, whereClause, whereArgs)
     }
 
+    fun deleteItem(){
+        db.delete(TABLE_NAME_CART,null, null)
+    }
+
 //    fun saveAddress(address: Address) {
 //        var contentValues = ContentValues()
 //        contentValues.put(COL_UID, address.userId)

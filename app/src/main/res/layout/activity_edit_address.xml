@@ -1,0 +1,251 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_add_new_address">
+
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <include layout="@layout/app_bar_add_address" />
+
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="40dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_address_form"
+                            android:orientation="vertical"
+                            android:padding="30dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/edit_text_hint_billing_name"
+                                android:textColor="@color/color_edit_text"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/add_address_marginTop"
+                                android:text="@string/edit_text_hint_patient_name"
+                                android:textColorLink="@color/color_edit_text"
+                                android:textColor="@color/color_edit_text"
+                                android:textSize="@dimen/add_address_text_size" />
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edit_text_billing_name_edit"
+                                android:textColor="@color/color_edit_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/edit_text_add_address"
+                                android:backgroundTint="@color/color_edit_text" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/add_address_marginTop"
+                                android:text="@string/edit_text_hint_mobile"
+                                android:textColor="@color/color_edit_text"
+                                android:textSize="@dimen/add_address_text_size" />
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edit_text_mobile_edit"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/color_edit_text"
+                                android:layout_height="@dimen/edit_text_add_address"
+                                android:backgroundTint="@color/color_edit_text" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_address_form"
+                            android:orientation="vertical"
+                            android:layout_marginTop="20dp"
+                            android:padding="30dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/text_view_delivery_address"
+                                android:textColor="@color/color_edit_text"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/add_address_marginTop"
+                                android:text="@string/edit_text_hint_street_address"
+                                android:textColor="@color/color_edit_text"
+                                android:textSize="@dimen/add_address_text_size" />
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edit_text_street_address_edit"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/color_edit_text"
+                                android:layout_height="@dimen/edit_text_add_address"
+                                android:backgroundTint="@color/color_edit_text" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/add_address_marginTop"
+                                android:text="@string/edit_text_hint_house_no"
+                                android:textColor="@color/color_edit_text"
+                                android:textSize="@dimen/add_address_text_size" />
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edit_text_house_no_edit"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/color_edit_text"
+                                android:layout_height="@dimen/edit_text_add_address"
+                                android:backgroundTint="@color/color_edit_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/add_address_marginTop"
+                                        android:text="@string/edit_text_hint_city"
+                                        android:textColor="@color/color_edit_text"
+                                        android:textSize="@dimen/add_address_text_size" />
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/edit_text_city_name_edit"
+                                        android:layout_width="match_parent"
+                                        android:textColor="@color/color_edit_text"
+                                        android:layout_height="@dimen/edit_text_add_address"
+                                        android:backgroundTint="@color/color_edit_text" />
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/add_address_marginTop"
+                                        android:text="@string/edit_text_hint_zip_code"
+                                        android:textColor="@color/color_edit_text"
+                                        android:textSize="@dimen/add_address_text_size" />
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/edit_text_zip_code_edit"
+                                        android:layout_width="match_parent"
+                                        android:textColor="@color/color_edit_text"
+                                        android:layout_height="@dimen/edit_text_add_address"
+                                        android:backgroundTint="@color/color_edit_text" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/add_address_marginTop"
+                                android:text="@string/edit_text_hint_address_type"
+                                android:textColor="@color/color_edit_text"
+                                android:textSize="@dimen/add_address_text_size" />
+
+                            <RadioGroup
+                                android:id="@+id/radio_group_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/radio_button_home_edit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:text="@string/radio_home"
+                                    android:buttonTint="@android:color/white"
+                                    android:textColor="@color/color_edit_text"
+                                    android:textSize="12dp" />
+
+                                <RadioButton
+                                    android:id="@+id/radio_button_office_edit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:buttonTint="@android:color/white"
+                                    android:text="@string/radio_office"
+                                    android:textColor="@color/color_edit_text"
+                                    android:textSize="12dp" />
+
+                                <RadioButton
+                                    android:id="@+id/radio_button_other_edit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:buttonTint="@android:color/white"
+                                    android:layout_margin="5dp"
+                                    android:text="@string/radio_other"
+                                    android:textColor="@color/color_edit_text"
+                                    android:textSize="12dp" />
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    <Button
+                        android:id="@+id/button_save_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/bg_white_stroke"
+                        android:drawablePadding="-100dp"
+                        android:text="@string/text_button_edit_address"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

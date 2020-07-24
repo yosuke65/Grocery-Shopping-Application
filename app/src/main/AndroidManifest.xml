@@ -13,14 +13,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.OrderActivity"></activity>
-        <activity android:name=".activities.OrderConfirmationActivity" />
-        <activity android:name=".activities.AddAddressActivity" />
-        <activity android:name=".activities.PaymentActivity" />
-        <activity android:name=".activities.AddressActivity" />
-        <activity android:name=".activities.ShoppingCartActivity" />
-        <activity android:name=".activities.LoginRegisterActivity" />
-        <activity android:name=".activities.UserProfileActivity" />
+        <activity android:name=".activities.EditAddressActivity"></activity>
+        <activity android:name=".activities.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.OrderDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.OrderActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.OrderConfirmationActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.AddAddressActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.PaymentActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.AddressActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.ShoppingCartActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.LoginRegisterActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activities.UserProfileActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".activities.RegisterActivity"
             android:launchMode="singleTop" />
@@ -35,13 +62,7 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".activities.MainActivity"
-            android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group>
         <item
             android:id="@+id/item_account"
-            android:title="My Account"></item>
+            android:title="My Account"
+            android:actionLayout="@layout/action_layout_title_menu"/>
         <item
             android:id="@+id/item_order"
-            android:title="My Order"></item>
+            android:title="My Order"/>
         <item
             android:id="@+id/item_category"
-            android:title="Category"></item>
+            android:title="Category"/>
     </group>
 
     <group>
         <item
             android:id="@+id/item_rate_app"
-            android:title="Rate this App"></item>
+            android:title="Rate this App"/>
         <item
             android:id="@+id/item_help"
-            android:title="Help"></item>
+            android:title="Help"/>
         <item
             android:id="@+id/item_logout"
-            android:title="Logout"></item>
+            android:title="Logout"/>
     </group>
 </menu>

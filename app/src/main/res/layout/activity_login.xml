@@ -6,19 +6,13 @@
     android:padding="30dp">
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="40dp"
-        app:cardElevation="10dp">
-
 
         <LinearLayout
             android:id="@+id/login_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:background="@android:color/white"
+            android:background="@drawable/bg_address_form"
             android:orientation="vertical"
             android:padding="40dp">
 
@@ -29,7 +23,7 @@
                 android:layout_marginTop="60dp"
                 android:text="@string/sign_in"
                 android:fontFamily="sans-serif-condensed"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/color_edit_text"
                 android:textSize="30dp" />
 
             <TextView
@@ -37,14 +31,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/edit_text_hint_email"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/color_edit_text"
                 android:textSize="12dp" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/darker_gray"
+                android:backgroundTint="@color/color_edit_text"
+                android:textColor="@color/color_edit_text"
                 android:inputType="textEmailAddress" />
 
             <TextView
@@ -52,14 +47,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/edit_text_hint_password"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/color_edit_text"
                 android:textSize="12dp" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/darker_gray"
+                android:backgroundTint="@color/color_edit_text"
+                android:textColor="@color/color_edit_text"
                 android:inputType="textPassword" />
 
             <Button
@@ -68,17 +64,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/login_info"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/bg_login_register_button"
+                android:background="@drawable/bg_white_stroke"
                 android:text="@string/sign_in"
                 android:textColor="@android:color/white" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_anim_view_loading"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:lottie_loop="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                app:lottie_rawRes="@raw/splash_loading"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-
-    <ProgressBar
-        android:id="@+id/progress_circular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="visible" />
 </RelativeLayout>

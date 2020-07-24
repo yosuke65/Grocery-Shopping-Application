@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -41,9 +42,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-
-        progress_circular.show()
-
         var email = edit_text_email.text.toString()
         var password = edit_text_password.text.toString()
 
@@ -59,6 +57,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun postData(params: HashMap<String, String>) {
 
+        var lottieAnimView:LottieAnimationView = lottie_anim_view_loading
+        lottieAnimView.playAnimation()
+        lottieAnimView.visibility = View.VISIBLE
         val jsonObject = JSONObject(params as Map<String, String>)
         var request = JsonObjectRequest(
             Request.Method.POST,
@@ -74,12 +75,16 @@ class LoginActivity : AppCompatActivity() {
                 var email = loginResponse.user.email
                 var mobile = loginResponse.user.mobile
                 var token = loginResponse.token
+
                 sessionManager.login(id!!, name!!, email!!, mobile!!, token!!)
-                progress_circular.hide()
                 startActivity(Intent(this, MainActivity::class.java))
+                lottieAnimView.visibility = View.INVISIBLE
+                lottieAnimView.cancelAnimation()
             },
             Response.ErrorListener {
                 toast("Failed")
+                lottieAnimView.visibility = View.INVISIBLE
+                lottieAnimView.cancelAnimation()
             })
 
         Volley.newRequestQueue(this).add(request)

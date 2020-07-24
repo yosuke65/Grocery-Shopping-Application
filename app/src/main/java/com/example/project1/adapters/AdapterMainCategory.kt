@@ -8,32 +8,33 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project1.R
 import com.example.project1.activities.SubCatActivity
 import com.example.project1.apps.Endpoints
+import com.example.project1.helpers.toast
 import com.example.project1.models.Category
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.grid_category_adapter.view.*
+import java.util.logging.Handler
 
 class AdapterMainCategory(var mContext: Context) :
     RecyclerView.Adapter<AdapterMainCategory.MyViewHolder>() {
 
     var mList: ArrayList<Category> = ArrayList()
+    var listener:OnAdapterListner? = null
+
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(cat: Category) {
+        fun bind(cat: Category, position:Int) {
 
             Picasso.get().load(Endpoints.getImageURL(cat.catImage)).fit().centerCrop()
                 .placeholder(R.drawable.loading_image_main).error(R.drawable.icon_no_image)
                 .into(itemView.image_view_category, object : Callback {
                     override fun onSuccess() {
-
-                        var animation: Animation =
-                            AnimationUtils.loadAnimation(mContext, R.anim.anim_text_view_cat_name)
-                        itemView.text_view_cat_name.startAnimation(animation)
-                        itemView.text_view_cat_name.text = cat.catName
+                            listener?.imageLoadSuccess(itemView,cat,position)
                     }
 
                     override fun onError(e: java.lang.Exception?) {
@@ -56,6 +57,14 @@ class AdapterMainCategory(var mContext: Context) :
         )
     }
 
+    interface OnAdapterListner{
+        fun imageLoadSuccess(view:View, cat:Category,position:Int)
+    }
+
+    fun setOnAdapterListenr(onAdapterListner: OnAdapterListner){
+        listener = onAdapterListner
+    }
+
     fun setData(list: ArrayList<Category>) {
         mList = list
         notifyDataSetChanged()
@@ -66,6 +75,6 @@ class AdapterMainCategory(var mContext: Context) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(mList[position])
+        holder.bind(mList[position],position)
     }
 }

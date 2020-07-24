@@ -3,4 +3,5 @@
     <dimen name="add_address_marginTop">10dp</dimen>
     <dimen name="edit_text_add_address">40dp</dimen>
     <dimen name="add_address_text_size">12dp</dimen>
+    <dimen name="grid_main_cat">160dp</dimen>
 </resources>

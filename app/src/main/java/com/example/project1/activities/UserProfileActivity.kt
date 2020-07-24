@@ -28,7 +28,7 @@ class UserProfileActivity : AppCompatActivity() {
 
         button_sign_out.setOnClickListener{
             sessionManager.logout()
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this,LoginRegisterActivity::class.java))
         }
     }
 }

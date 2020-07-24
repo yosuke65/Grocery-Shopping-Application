@@ -24,7 +24,6 @@ import kotlinx.android.synthetic.main.activity_order.*
 
 class OrderActivity : AppCompatActivity() {
     var mList: ArrayList<Order> = ArrayList()
-    private var productList:ArrayList<Product> = ArrayList()
     lateinit var dbHelper:DBHelper
 
     lateinit var myAdapter:AdapterOrderList
@@ -56,20 +55,12 @@ class OrderActivity : AppCompatActivity() {
             Response.Listener {
                 var gson = GsonBuilder().create()
                 var orderResponse = gson.fromJson(it, OrderResponse::class.java)
-                Log.d("order", orderResponse.data.size.toString())
+
                 for (order in orderResponse.data){
                     mList.add(order)
-                    Log.d("order", order?.orderStatus)
-                    Log.d("order", order?.date)
-                    for (product in order.products){
-                        product.orderStatus = order.orderStatus
-                        product.orderDate = order.date
-                        productList.add(product)
-                    }
+                    Log.d("order", order.products.size.toString())
                 }
-                Log.d("order", productList.size.toString())
-
-                myAdapter.setData(productList)
+                myAdapter.setData(mList)
 
             }, Response.ErrorListener {
                 toast("Request Failed")

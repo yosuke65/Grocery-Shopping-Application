@@ -12,20 +12,11 @@ data class Address(
     val streetName: String,
     val type: String,
     val userId: String,
-    val billingName:String = ""
+    val name:String,
+    val mobile:String
 ): Serializable{
 
     companion object{
         const val KEY = "address_key"
-        const val HOME = 1
     }
-
-    fun getAddressType(type: Int): String {
-        return when (type) {
-            1 -> "Home"
-            2 -> "Office"
-            else -> "Other"
-        }
-    }
-
 }

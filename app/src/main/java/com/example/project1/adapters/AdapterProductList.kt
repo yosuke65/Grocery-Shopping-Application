@@ -15,8 +15,10 @@ import com.example.project1.database.DBHelper
 import com.example.project1.helpers.SessionManager
 import com.example.project1.helpers.toast
 import com.example.project1.models.Product
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_product_adapter.view.*
+import java.lang.Exception
 
 class AdapterProductList(var mContext: Context) :
     RecyclerView.Adapter<AdapterProductList.MyViewHolder>() {
@@ -75,7 +77,16 @@ class AdapterProductList(var mContext: Context) :
                 "Save $${"%.2f".format(product.mrp!! - product.price!!)}"
             Picasso.get().load(Endpoints.getImageURL(product.image!!)).fit().centerCrop()
                 .placeholder(R.drawable.progress_loading_image).error(R.drawable.icon_no_image)
-                .into(itemView.image_view_product)
+                .into(itemView.image_view_product, object:Callback{
+                    override fun onSuccess() {
+                        listener?.onImageLoadSuccess(itemView)
+                    }
+
+                    override fun onError(e: Exception?) {
+
+                    }
+
+                })
 
         }
 
@@ -86,6 +97,8 @@ class AdapterProductList(var mContext: Context) :
             LayoutInflater.from(mContext).inflate(R.layout.row_product_adapter, parent, false)
         )
     }
+
+
 
     override fun getItemCount(): Int {
         return mList.size
@@ -98,6 +111,7 @@ class AdapterProductList(var mContext: Context) :
 
     interface OnAdapterInteraction {
         fun onItemClicked(view: View, operation: String, position: Int, product: Product)
+        fun onImageLoadSuccess(view: View)
     }
 
     fun setOnAdapterInteraction(onAdapterInteraction: OnAdapterInteraction) {
