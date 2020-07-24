@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
 
-    val delayedTime:Long = 10000
+    val delayedTime:Long = 3000
     lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

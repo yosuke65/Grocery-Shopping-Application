@@ -5,5 +5,4 @@
     android:theme="@style/AppTheme"
     >
 
-
 </androidx.appcompat.widget.Toolbar>

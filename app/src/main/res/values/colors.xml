@@ -36,6 +36,7 @@
     <color name="gradientEnd">#FFA3A3</color>
     <color name="color_edit_text">#ffffff</color>
     <color name="color_card_view_bg">#4DFFFFFF</color>
+    <color name="white2">#08000000</color>
 
 
 </resources>

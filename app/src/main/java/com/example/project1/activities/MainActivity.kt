@@ -16,6 +16,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +41,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.grid_category_adapter.view.*
+import kotlinx.android.synthetic.main.low_category_adapter.view.*
 import kotlinx.android.synthetic.main.main_menu.view.*
 import kotlinx.android.synthetic.main.nav_header_layout.view.*
 import kotlinx.android.synthetic.main.placeholder_layout_main_cat.*
@@ -88,8 +89,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setDrawer()
 
         var myAdapter = AdapterMainCategory(this)
+
+        var dividerItemDecoration = DividerItemDecoration(this,LinearLayoutManager.VERTICAL)
+        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.custom_divider)!!)
+        recycler_view.addItemDecoration(dividerItemDecoration)
         recycler_view.layoutManager =
-            GridLayoutManager(this, 2)
+            LinearLayoutManager(this)
         recycler_view.adapter = myAdapter
         recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -102,7 +107,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         })
         lastVisiblePosition =
-            (recycler_view.layoutManager as GridLayoutManager).findLastVisibleItemPosition()
+            (recycler_view.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
         Log.d("anim1", lastVisiblePosition.toString())
         myAdapter.setOnAdapterListenr(this)
 

@@ -2,23 +2,17 @@ package com.example.project1.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.AnimationDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project1.R
 import com.example.project1.activities.SubCatActivity
 import com.example.project1.apps.Endpoints
-import com.example.project1.helpers.toast
 import com.example.project1.models.Category
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.grid_category_adapter.view.*
-import java.util.logging.Handler
+import kotlinx.android.synthetic.main.low_category_adapter.view.*
 
 class AdapterMainCategory(var mContext: Context) :
     RecyclerView.Adapter<AdapterMainCategory.MyViewHolder>() {
@@ -53,7 +47,7 @@ class AdapterMainCategory(var mContext: Context) :
         viewType: Int
     ): AdapterMainCategory.MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(mContext).inflate(R.layout.grid_category_adapter, parent, false)
+            LayoutInflater.from(mContext).inflate(R.layout.low_category_adapter, parent, false)
         )
     }
 

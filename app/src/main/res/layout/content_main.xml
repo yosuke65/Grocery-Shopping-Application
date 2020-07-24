@@ -1,97 +1,30 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white2"
+    android:id="@+id/content_layout_main">
 
-    <include layout="@layout/app_bar" />
+    <include layout="@layout/app_bar2" />
 
-    <View
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorTransparentBlack3" />
-
-    <RelativeLayout
-        android:id="@+id/content_layout_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible">
-
-
-        <RelativeLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:id="@+id/collapsible_view_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:context=".MainActivity"
-                android:layout_marginBottom="10dp">
-
-                <com.google.android.material.appbar.AppBarLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/appBarLayout"
-                    android:theme="@style/Platform.MaterialComponents.Light">
-
-                    <com.google.android.material.appbar.CollapsingToolbarLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_scrollFlags="scroll||snap||exitUntilCollapsed"
-                        >
-                    </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-                </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="3dp"
+            android:background="@drawable/custom_divider" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </LinearLayout>
 
 
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/image_view_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="35dp"
-                    android:layout_marginTop="25dp"
-                    app:cardCornerRadius="40dp"
-                    app:cardElevation="7dp">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:background="@drawable/view_pager_temp"
-                            android:gravity="center" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:background="#33000000" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:gravity="center"
-                            android:text="Healthy Food"
-                            android:textColor="@android:color/white"
-                            android:typeface="sans"
-                            android:textSize="32dp" />
-
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:paddingHorizontal="25dp"
-                android:layout_below="@id/collapsible_view_main" />
-        </RelativeLayout>
-    </RelativeLayout>
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
