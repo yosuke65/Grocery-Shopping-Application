@@ -10,7 +10,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.AbsListView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +17,6 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
@@ -34,20 +32,20 @@ import com.example.project1.helpers.toolbar
 import com.example.project1.models.Category
 import com.example.project1.models.CategoryResponse
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.action_layout_title_menu.view.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.low_category_adapter.view.*
 import kotlinx.android.synthetic.main.main_menu.view.*
 import kotlinx.android.synthetic.main.nav_header_layout.view.*
 import kotlinx.android.synthetic.main.placeholder_layout_main_cat.*
+import kotlinx.android.synthetic.main.row_category_adapter.view.*
 import kotlinx.android.synthetic.main.shopping_cart_menu.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    AppBarLayout.OnOffsetChangedListener,
     AdapterMainCategory.OnAdapterListner {
 
 
@@ -90,11 +88,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         var myAdapter = AdapterMainCategory(this)
 
-        var dividerItemDecoration = DividerItemDecoration(this,LinearLayoutManager.VERTICAL)
-        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.custom_divider)!!)
-        recycler_view.addItemDecoration(dividerItemDecoration)
-        recycler_view.layoutManager =
-            LinearLayoutManager(this)
+        var horizontalDivider = DividerItemDecoration(this, GridLayoutManager.VERTICAL)
+        horizontalDivider.setDrawable(resources.getDrawable(R.drawable.custom_divider)!!)
+        var verticalDivider = DividerItemDecoration(this, GridLayoutManager.HORIZONTAL)
+        horizontalDivider.setDrawable(resources.getDrawable(R.drawable.custom_divider)!!)
+        verticalDivider.setDrawable(resources.getDrawable(R.drawable.custom_divider)!!)
+        recycler_view.addItemDecoration(horizontalDivider)
+        recycler_view.addItemDecoration(verticalDivider)
+
+        var gridLayoutManager =
+            GridLayoutManager(this,2)
+
+
+
+        recycler_view.layoutManager = gridLayoutManager
         recycler_view.adapter = myAdapter
         recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -102,12 +109,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Log.d("anim1", "onScrolled called")
 
                 lastVisiblePosition =
-                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastVisibleItemPosition()
+                    (recyclerView.layoutManager as GridLayoutManager?)!!.findLastVisibleItemPosition()
                 Log.d("anim1", lastVisiblePosition.toString())
             }
         })
         lastVisiblePosition =
-            (recycler_view.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+            (recycler_view.layoutManager as GridLayoutManager).findLastVisibleItemPosition()
         Log.d("anim1", lastVisiblePosition.toString())
         myAdapter.setOnAdapterListenr(this)
 
@@ -155,7 +162,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
+        menuInflater.inflate(R.menu.main_menu2, menu)
         return super.onCreateOptionsMenu(menu)
 
     }
@@ -220,29 +227,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return super.onOptionsItemSelected(item)
     }
 
-    private fun animMenuStart(menu: Menu) {
-        for (i in 0 until menu.size()) {
-            var itemMenu = menu.getItem(i)
-            when (itemMenu.itemId) {
-                R.id.item_account -> {
-                    var animation =
-                        AnimationUtils.loadAnimation(this, R.anim.anim_show_order_summary)
-                    itemMenu.setActionView(R.layout.action_layout_title_menu)
-                    itemMenu.actionView.startAnimation(animation)
-                }
-                R.id.item_order -> {
-                    var animation =
-                        AnimationUtils.loadAnimation(this, R.anim.anim_show_order_summary)
-                    itemMenu.setActionView(R.layout.action_layout_title_menu)
-                    itemMenu.actionView.text_view_action_layout.text = "MY ACCOUNT"
-                    itemMenu.actionView.startAnimation(animation)
-                }
-            }
-        }
-
-    }
-
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_account -> {
@@ -300,6 +284,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun isImageLoadCompleted(size: Int): Boolean {
         return size == lastVisiblePosition + 1
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        //measuring for alpha
+        //measuring for alpha
+        val toolBarHeight: Int = toolbar_main.getMeasuredHeight()
+        val appBarHeight = appBarLayout!!.measuredHeight
+        val f =
+            (appBarHeight.toFloat() - toolBarHeight + verticalOffset) / (appBarHeight.toFloat() - toolBarHeight) * 255
+        toolbar_main.getBackground().setAlpha(255 - Math.round(f))
+        Log.d("toolbar", "ToolbarHeight: ${toolBarHeight}")
+
     }
 
 }

@@ -1,8 +1,9 @@
 <com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shimmer_view_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/shimmer_view_container">
+    android:background="@android:color/black">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,104 +11,52 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <View
-            android:layout_marginTop="?actionBarSize"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorTransparentBlack3" />
+            android:layout_height="250dp"
+            android:background="#33000000" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/image_view_main"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginTop="25dp"
-                app:cardCornerRadius="40dp">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:background="#33000000" />
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <RelativeLayout
-                android:paddingTop="15dp"
-                android:paddingHorizontal="25dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="230dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/colorShimmer"/>
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="230dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="@color/colorShimmer"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view_cat1"
-                    android:layout_width="@dimen/grid_main_cat"
-                    android:layout_height="@dimen/grid_main_cat"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="40dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#33000000" />
-
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view_cat2"
-                    android:layout_toRightOf="@+id/card_view_cat1"
-                    android:layout_width="@dimen/grid_main_cat"
-                    android:layout_height="@dimen/grid_main_cat"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="40dp">
-
-                    <ImageView
-                        android:id="@+id/image_view_filter"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:background="#33000000" />
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view_cat3"
-                    android:layout_toRightOf="@+id/card_view_cat1"
-                    android:layout_width="@dimen/grid_main_cat"
-                    android:layout_height="@dimen/grid_main_cat"
-                    android:layout_margin="10dp"
-                    android:layout_below="@+id/card_view_cat1"
-                    app:cardCornerRadius="40dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:background="#33000000" />
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view_cat4"
-                    android:layout_width="@dimen/grid_main_cat"
-                    android:layout_height="@dimen/grid_main_cat"
-                    android:layout_margin="10dp"
-                    android:layout_below="@+id/card_view_cat1"
-                    android:layout_toLeftOf="@+id/card_view_cat3"
-                    app:cardCornerRadius="40dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:background="#33000000" />
-                </androidx.cardview.widget.CardView>
-
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="230dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/colorShimmer"/>
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="230dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="@color/colorShimmer"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </com.facebook.shimmer.ShimmerFrameLayout>

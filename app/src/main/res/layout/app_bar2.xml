@@ -6,17 +6,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            app:contentScrim="@color/colorPrimary"
+            app:contentScrim="#66000000"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:title="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/view_pager_temp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="#4D000000"/>
+            </RelativeLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/view_pager_temp" />
+
 
             <androidx.appcompat.widget.Toolbar
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"

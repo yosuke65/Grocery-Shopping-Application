@@ -30,7 +30,7 @@
     <color name="colorTheme6">#FF928B</color>
     <color name="colorTransparentBlack4">#99000000</color>
     <color name="colorTransparentBlack5">#80000000</color>
-    <color name="colorShimmer">#33000000</color>
+    <color name="colorShimmer">#D3D3D3</color>
     <color name="gradientStart">#FBD7A1</color>
     <color name="gradientCenter">#FFAE85</color>
     <color name="gradientEnd">#FFA3A3</color>

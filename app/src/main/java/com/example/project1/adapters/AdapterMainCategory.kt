@@ -12,7 +12,7 @@ import com.example.project1.apps.Endpoints
 import com.example.project1.models.Category
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.low_category_adapter.view.*
+import kotlinx.android.synthetic.main.row_category_adapter.view.*
 
 class AdapterMainCategory(var mContext: Context) :
     RecyclerView.Adapter<AdapterMainCategory.MyViewHolder>() {
@@ -47,7 +47,7 @@ class AdapterMainCategory(var mContext: Context) :
         viewType: Int
     ): AdapterMainCategory.MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(mContext).inflate(R.layout.low_category_adapter, parent, false)
+            LayoutInflater.from(mContext).inflate(R.layout.grid_category_adapter, parent, false)
         )
     }
 
